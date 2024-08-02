@@ -30,9 +30,12 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "src/assets/drawflow/drawflow.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "src/assets/drawflow/drawflow.min.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
