@@ -3,11 +3,12 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@a
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { PrimengLoaderModule } from './core/primeng-loader.module';
 
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [AppRoutingModule, AppLayoutModule],
+    imports: [AppRoutingModule, AppLayoutModule,PrimengLoaderModule],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },
     ],

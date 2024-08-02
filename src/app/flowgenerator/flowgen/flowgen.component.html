@@ -1,0 +1,119 @@
+
+<p-toast></p-toast>
+<div class="grid">
+
+  <div class="col-2">
+    <button pButton type="button" label="Click"></button>
+    <p-panel header="Элементы">
+      <div class="drag-drawflow" draggable="true" (dragstart)="drag($event)" data-node="facebook">
+        <i class="fab fa-facebook"></i><span> Facebook</span>
+      </div>
+      <div class="drag-drawflow" draggable="true" (dragstart)="drag($event)" data-node="start">
+        <i class="fas fa-code-branch"></i><span> Старт</span>
+      </div>
+      <div class="drag-drawflow" draggable="true" (dragstart)="drag($event)" data-node="step">
+        <i class="fas fa-code-branch"></i><span> Шаг</span>
+      </div>
+    </p-panel>
+
+    <!-- <p-panel header="Состояние">
+    </p-panel>
+    <p-panel header="Поведение">
+      <div class="drag-drawflow" pDraggable="behaviours" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="email">Отправить письмо</div>
+      <div class="drag-drawflow" pDraggable="behaviours" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="tg">Отправить в ТГ</div>
+    </p-panel>
+    <p-panel header="Переходы">
+      <div class="drag-drawflow" pDraggable="transitions" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="bigger">Больше</div>
+      <div class="drag-drawflow" pDraggable="transitions" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="less">Меньше</div>
+      <div class="drag-drawflow" pDraggable="transitions" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="empty">Пустота</div>
+    </p-panel> -->
+  </div>
+  <div class="col-10">
+    <p-tabView>
+      <p-tabPanel header="Header I">
+        <div id="drawflow" (drop)="drop($event)" (dragover)="allowDrop($event)">
+
+
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Header 2222">
+        <button pButton type="button" (click)="export()">Export</button>
+        <button pButton type="button" (click)="onClear()">Clear</button>
+        <div class="btn-lock">
+          <i id="lock" class="fas fa-lock" onclick="editor.editor_mode='fixed'; changeMode('lock');"></i>
+          <i id="unlock" class="fas fa-lock-open" onclick="editor.editor_mode='edit'; changeMode('unlock');"
+            style="display:none;"></i>
+        </div>
+        <div class="bar-zoom">
+          <i class="fas fa-search-minus" (click)="onZoomOut()"></i>
+          <i class="fas fa-search" (click)="onZoomReset()"></i>
+          <i class="fas fa-search-plus" (click)="onZoomIn()"></i>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Header III">
+        <p>
+          At vero eos et accusamus et iusto
+        </p>
+      </p-tabPanel>
+    </p-tabView>
+
+    <!--<p-dialog header="Настройка" [(visible)]="sidebarVisible" [style]="{width:'70%', height:'50%'}" >
+
+    </p-dialog>-->
+
+
+  </div>
+  <p-sidebar [modal]="false" [(visible)]="sidebarVisible" position="right" styleClass="p-sidebar-lg" [style]="{width:'50%', right:'0'}">
+
+    <ng-template pTemplate="content">
+      <p-tabView>
+        {{selectedNode|json}}
+
+        <input type="text" pInputText [(ngModel)]="selectedNode.data.name!" (ngModelChange)="updateHtml()" />
+        <p-tabPanel header="Поведение">
+
+          <div pDroppable="behaviours" (onDrop)="drop($event, 'behaviour')" [style]="{width:'100%', height:'50px'}">
+            <p-accordion [multiple]="true">
+              <p-accordionTab *ngFor="let beh of selectedNode.data.behaviors; index as i ">
+                <ng-template pTemplate="header">
+                  {{beh}}
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-sm" [style]="{marginLeft:'auto'}" (click)="deleteItem(i,selectedNode.data.behaviors)"></button>
+                </ng-template>
+              </p-accordionTab>
+
+            </p-accordion>
+
+            <!-- {{selectedNode.data.behaviors |json}} -->
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Переходы">
+          <div pDroppable="transitions" (onDrop)="drop($event, 'transition')" [style]="{width:'100%', height:'50px'}">
+            <p-accordion [multiple]="true">
+              <p-accordionTab *ngFor="let trans of selectedNode.data.transitions; index as i">
+                <ng-template pTemplate="header">
+                  {{trans}}
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-sm" (click)="deleteItem(i,selectedNode.data.transitions)" [style]="{marginLeft:'auto'}"></button>
+                </ng-template>
+                <p>{{trans}}</p>
+              </p-accordionTab>
+
+            </p-accordion>
+            {{selectedNode.data.transitions |json}}
+          </div>
+
+        </p-tabPanel>
+      </p-tabView>
+    </ng-template>
+
+
+
+
+
+
+  </p-sidebar>
+
+</div>
+
+
+
+

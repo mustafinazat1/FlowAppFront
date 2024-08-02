@@ -34,7 +34,6 @@
                             "src/assets/drawflow/drawflow.css"
                         ],
                         "scripts": [
-                            "src/assets/drawflow/drawflow.min.js"
                         ]
                     },
                     "configurations": {

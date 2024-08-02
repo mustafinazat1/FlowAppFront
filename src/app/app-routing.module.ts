@@ -8,6 +8,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
             {
                 path: '', component: AppLayoutComponent,
                 children: [
+                    { path: 'flow', loadChildren: () => import('./flowgenerator/flowgenerator.module').then(m => m.FlowgeneratorModule) },
                 ]
             },
             { path: '**', redirectTo: '/notfound' },
