@@ -3,11 +3,8 @@
 <div class="grid">
 
   <div class="col-2">
-    <button pButton type="button" label="Click"></button>
+    <button pButton type="button" label="Click" (click)="rewriteJson()"></button>
     <p-panel header="Элементы">
-      <div class="drag-drawflow" draggable="true" (dragstart)="drag($event)" data-node="facebook">
-        <i class="fab fa-facebook"></i><span> Facebook</span>
-      </div>
       <div class="drag-drawflow" draggable="true" (dragstart)="drag($event)" data-node="start">
         <i class="fas fa-code-branch"></i><span> Старт</span>
       </div>
@@ -16,7 +13,7 @@
       </div>
     </p-panel>
 
-    <!-- <p-panel header="Состояние">
+     <p-panel header="Состояние">
     </p-panel>
     <p-panel header="Поведение">
       <div class="drag-drawflow" pDraggable="behaviours" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="email">Отправить письмо</div>
@@ -26,12 +23,12 @@
       <div class="drag-drawflow" pDraggable="transitions" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="bigger">Больше</div>
       <div class="drag-drawflow" pDraggable="transitions" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="less">Меньше</div>
       <div class="drag-drawflow" pDraggable="transitions" (onDragStart)="dragStart($event)" (onDragEnd)="dragEnd($event)" data-node="empty">Пустота</div>
-    </p-panel> -->
+    </p-panel> 
   </div>
   <div class="col-10">
     <p-tabView>
       <p-tabPanel header="Header I">
-        <div id="drawflow" (drop)="drop($event)" (dragover)="allowDrop($event)">
+        <div id="drawflow" (drop)="drop($event)" (dragover)="allowDrop($event)" style="width: 100%;">
 
 
         </div>
@@ -72,12 +69,12 @@
         <input type="text" pInputText [(ngModel)]="selectedNode.data.name!" (ngModelChange)="updateHtml()" />
         <p-tabPanel header="Поведение">
 
-          <div pDroppable="behaviours" (onDrop)="drop($event, 'behaviour')" [style]="{width:'100%', height:'50px'}">
+          <div pDroppable="behaviours" (onDrop)="dropElem($event, 'behaviour')" [style]="{width:'100%', height:'50px'}">
             <p-accordion [multiple]="true">
               <p-accordionTab *ngFor="let beh of selectedNode.data.behaviors; index as i ">
                 <ng-template pTemplate="header">
                   {{beh}}
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-sm" [style]="{marginLeft:'auto'}" (click)="deleteItem(i,selectedNode.data.behaviors)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-sm" [style]="{marginLeft:'auto'}" (click)="deleteItem(i,'',selectedNode.data.behaviors)"></button>
                 </ng-template>
               </p-accordionTab>
 
@@ -87,12 +84,12 @@
           </div>
         </p-tabPanel>
         <p-tabPanel header="Переходы">
-          <div pDroppable="transitions" (onDrop)="drop($event, 'transition')" [style]="{width:'100%', height:'50px'}">
+          <div pDroppable="transitions" (onDrop)="dropElem($event, 'transition')" [style]="{width:'100%', height:'50px'}">
             <p-accordion [multiple]="true">
               <p-accordionTab *ngFor="let trans of selectedNode.data.transitions; index as i">
                 <ng-template pTemplate="header">
                   {{trans}}
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-sm" (click)="deleteItem(i,selectedNode.data.transitions)" [style]="{marginLeft:'auto'}"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-danger p-button-sm" (click)="deleteItem(i,'transition',selectedNode.data.transitions)" [style]="{marginLeft:'auto'}"></button>
                 </ng-template>
                 <p>{{trans}}</p>
               </p-accordionTab>
